@@ -25,7 +25,7 @@ var grade_values = {
   'FS': 0
 };
 console.log(studentId);
-var show_total_gpa = function () {
+show_total_gpa = function () {
   $('#gpa_button').val('Calculating');
   $('#gpa_bar').remove();
   $.ajax('http://192.168.0.103:9090/aims/courseReg/loadMyCoursesHistroy?studentId=' + studentId + '&courseCd=&courseName=&orderBy=1&degreeIds=&acadPeriodIds=&regTypeIds=&gradeIds=&resultIds=&isGradeIds=').done(function (json) {
