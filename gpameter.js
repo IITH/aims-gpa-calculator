@@ -47,7 +47,7 @@ show_total_gpa = function () {
             break;
           }
         }
-        
+
         if (!is_exception) {
           console.log('Skipping : ' + entry['courseName']);
           continue;
@@ -63,8 +63,9 @@ show_total_gpa = function () {
       total_credits += credits;
     }
     console.log(total_grades, total_credits);
+    var gpa = (total_grades / total_credits).toFixed(2);
     $('#gpa_button').val('Show Gpa');
-    $('#courseHistoryUI .clear').after('<ul id="gpa_bar" class="subCnt"><li class="hierarchyLi dataLi hierarchyHdr changeHdrCls"><span class="col"> TOTAL GPA </span></li><li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Total GPA of graded courses</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + Math.floor(total_grades * 100 / total_credits) / 100 + '</span></li></ul>');
+    $('#courseHistoryUI .clear').after('<ul id="gpa_bar" class="subCnt"><li class="hierarchyLi dataLi hierarchyHdr changeHdrCls"><span class="col"> TOTAL GPA </span></li><li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Total GPA of graded courses</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + gpa + '</span></li></ul>');
   });
 }
 if (!(typeof unsafeWindow === 'undefined')) {
