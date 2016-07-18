@@ -71,6 +71,7 @@ show_total_gpa = function () {
 if (!(typeof unsafeWindow === 'undefined')) {
   unsafeWindow.show_total_gpa = show_total_gpa;
   unsafeWindow.exclude_list = exclude_list;
+  unsafeWindow.exclude_exceptions = exclude_exceptions;
   unsafeWindow.grade_values = grade_values;
 }
 $('#studentCourseSearch').before('<input id="gpa_button" class="btn" value="Show Gpa" style="width:75px;margib-right:10px; opacity:1;" type="button" onclick="show_total_gpa();"></input>');
