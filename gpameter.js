@@ -12,6 +12,9 @@ var exclude_list = [
   'FCC',
   'Additional Course'
 ];
+var exclude_exceptions = [
+    new RegExp('Research Internship.*')
+];
 var grade_values = {
   'A+': 10,
   'A': 10,
@@ -35,8 +38,20 @@ show_total_gpa = function () {
       entry = json[i];
       type = entry['courseElectiveTypeDesc'];
       if (exclude_list.indexOf(type) > - 1) {
-        console.log('Skipping : ' + entry['courseName']);
-        continue;
+
+        // check if this course is an exception
+        var is_exception = false;
+        for (var j in exclude_exceptions) {
+          if (exclude_exceptions[j].test(entry['courseName'])) {
+            is_exception = true;
+            break;
+          }
+        }
+        
+        if (!is_exception) {
+          console.log('Skipping : ' + entry['courseName']);
+          continue;
+        }
       }
       grade = entry['gradeDesc'];
       if (grade == '') {
