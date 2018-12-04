@@ -11,7 +11,7 @@ var exclude_list = [
   'Honours project',
   'Honours coursework',
   'FCC',
-  'Additional Course'
+  'Additional'
 ];
 var grade_values = {
   'A+': 10,
