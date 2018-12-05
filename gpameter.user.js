@@ -27,9 +27,11 @@ var grade_values = {
 };
 console.log(studentId);
 add_checkboxes = function(){
+    var mapElems = new Map();
 	$(".cgpa_cal_check").remove();
-	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");	
+	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
 	elems.each(function(i){
+		var cname = $(this).children(".col2").html().trim();
 		value = "checked";
 		type = $(this).children(".col5").html().trim().slice(6);
 		grade = $(this).children(".col8").html().trim().slice(6);
@@ -38,8 +40,13 @@ add_checkboxes = function(){
 			value = "";
 		if (grade == "" || grade == "I")
 			value = "";
-		$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+value+" />");
+        if (value.localeCompare("checked") == 0)
+			mapElems.set(cname, this);
+		$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\"/>");
 	});
+    for(const v of mapElems.values()){
+        $(v).children(".col1").children()[0].checked = true;
+    }
 }
 
 show_total_gpa = function(){
