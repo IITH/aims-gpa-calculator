@@ -32,8 +32,10 @@ add_checkboxes = function(){
 	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
 	elems.each(function(i){
 		var cname = $(this).children(".col2").html().trim();
-		if (mapElems.has(cname))
+		if (mapElems.has(cname)){
+			$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\" />");
 			return;
+		}
 		value = "checked";
 		type = $(this).children(".col5").html().trim().slice(6);
 		grade = $(this).children(".col8").html().trim().slice(6);
