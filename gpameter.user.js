@@ -32,6 +32,8 @@ add_checkboxes = function(){
 	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
 	elems.each(function(i){
 		var cname = $(this).children(".col2").html().trim();
+		if (mapElems.has(cname))
+			return;
 		value = "checked";
 		type = $(this).children(".col5").html().trim().slice(6);
 		grade = $(this).children(".col8").html().trim().slice(6);
@@ -42,11 +44,8 @@ add_checkboxes = function(){
 			value = "";
         if (value.localeCompare("checked") == 0)
 			mapElems.set(cname, this);
-		$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\"/>");
+		$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+value+" />");
 	});
-    for(const v of mapElems.values()){
-        $(v).children(".col1").children()[0].checked = true;
-    }
 }
 
 show_total_gpa = function(){
@@ -63,7 +62,7 @@ show_total_gpa = function(){
  		grade = $(this).children(".col8").html().trim().slice(6);
  		credits = $(this).children(".col3").html().trim().slice(6);
  		if (!(grade in grade_values))
- 			return; 		
+ 			return;
  		grade = grade_values[grade];
  		credits = Number(credits);
  		total_grades += credits * grade;
