@@ -26,19 +26,28 @@ var grade_values = {
   'FS': 0
 };
 console.log(studentId);
+append_checkbox = function(parent, is_checked){
+	parent.append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+(is_checked?"checked":"")+" />");
+}
 add_checkboxes = function(){
+	var courses_checked = new Set();
 	$(".cgpa_cal_check").remove();
-	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");	
+	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
 	elems.each(function(i){
-		value = "checked";
+		var course_id = $(this).children(".col1").html().trim();
+		if (courses_checked.has(course_id)){
+			append_checkbox($(this).children(".col1"), false);
+			return;
+		}
+		is_checked = true;
 		type = $(this).children(".col5").html().trim().slice(6);
 		grade = $(this).children(".col8").html().trim().slice(6);
 		console.log(grade, grade.length);
-		if (exclude_list.indexOf(type) > -1)
-			value = "";
-		if (grade == "" || grade == "I")
-			value = "";
-		$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+value+" />");
+		if (exclude_list.indexOf(type) > -1 || grade == "" || grade == "I")
+			is_checked = false;
+		if (is_checked)
+			courses_checked.add(course_id);
+		append_checkbox($(this).children(".col1"), is_checked);
 	});
 }
 
@@ -56,7 +65,7 @@ show_total_gpa = function(){
  		grade = $(this).children(".col8").html().trim().slice(6);
  		credits = $(this).children(".col3").html().trim().slice(6);
  		if (!(grade in grade_values))
- 			return; 		
+ 			return;
  		grade = grade_values[grade];
  		credits = Number(credits);
  		total_grades += credits * grade;
