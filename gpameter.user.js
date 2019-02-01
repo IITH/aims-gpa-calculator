@@ -27,7 +27,7 @@ var grade_values = {
 };
 console.log(studentId);
 add_checkboxes = function(){
-    var mapElems = new Map();
+	var mapElems = new Map();
 	$(".cgpa_cal_check").remove();
 	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
 	elems.each(function(i){
@@ -44,7 +44,7 @@ add_checkboxes = function(){
 			value = "";
 		if (grade == "" || grade == "I")
 			value = "";
-        if (value.localeCompare("checked") == 0)
+		if (value.localeCompare("checked") == 0)
 			mapElems.set(cname, this);
 		$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+value+" />");
 	});
