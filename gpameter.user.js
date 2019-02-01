@@ -37,7 +37,7 @@ add_checkboxes = function(){
 		var course_id = $(this).children(".col1").html().trim();
 		if (courses_checked.has(course_id)){
 			append_checkbox($(this).children(".col1"), false);
-            return;
+			return;
 		}
 		is_checked = true;
 		type = $(this).children(".col5").html().trim().slice(6);
