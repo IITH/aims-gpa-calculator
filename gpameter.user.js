@@ -26,27 +26,28 @@ var grade_values = {
   'FS': 0
 };
 console.log(studentId);
+append_checkbox = function(parent, is_checked){
+	parent.append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+(is_checked?"checked":"")+" />");
+}
 add_checkboxes = function(){
-	var mapElems = new Map();
+	var courses_checked = new Set();
 	$(".cgpa_cal_check").remove();
 	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
 	elems.each(function(i){
-		var cname = $(this).children(".col2").html().trim();
-		if (mapElems.has(cname)){
-			$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\" />");
-			return;
+		var course_id = $(this).children(".col1").html().trim();
+		if (courses_checked.has(course_id)){
+			append_checkbox($(this).children(".col1"), false);
+            return;
 		}
-		value = "checked";
+		is_checked = true;
 		type = $(this).children(".col5").html().trim().slice(6);
 		grade = $(this).children(".col8").html().trim().slice(6);
 		console.log(grade, grade.length);
-		if (exclude_list.indexOf(type) > -1)
-			value = "";
-		if (grade == "" || grade == "I")
-			value = "";
-		if (value.localeCompare("checked") == 0)
-			mapElems.set(cname, this);
-		$(this).children(".col1").append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+value+" />");
+		if (exclude_list.indexOf(type) > -1 || grade == "" || grade == "I")
+			is_checked = false;
+		if (is_checked)
+			courses_checked.add(course_id);
+		append_checkbox($(this).children(".col1"), is_checked);
 	});
 }
 
