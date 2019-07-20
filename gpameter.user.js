@@ -82,4 +82,4 @@ if (!(typeof unsafeWindow === 'undefined')) {
   unsafeWindow.add_checkbox = add_checkbox;
   unsafeWindow.grade_values = grade_values;
 }
-$('#studentCourseSearch').before('<input id="gpa_button" class="btn" value="Show Gpa" style="width:75px;margib-right:10px; opacity:1;" type="button" onclick="show_total_gpa();"></input>');
+$('#studentCourseSearch').before('<input id="gpa_button" class="btn" value="Show Gpa" style="width:75px; margin-right:10px; opacity:1;" type="button" onclick="show_total_gpa();"></input>');
