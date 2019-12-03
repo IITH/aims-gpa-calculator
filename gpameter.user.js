@@ -8,6 +8,7 @@
 // ==/UserScript==
 
 var exclude_list = [
+  'Honours Core'
   'Honours project',
   'Honours coursework',
   'FCC',
