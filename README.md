@@ -4,6 +4,8 @@ This is a Greasemonkey/Tampermonkey user script which will help you in calculati
 
 This script adds a `Show GPA` button on the webpage containing the list of courses and their grades.
 
+The `Show GPA` button also displays the number of credits of various categories you have done so far - e.g. LA/CA, Basic Sciences, Deptt Core, etc.    
+
 ## How to use
 
 There are two ways to use this script.
