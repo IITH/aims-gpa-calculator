@@ -17,6 +17,7 @@ var exclude_list = [
 ];
 
 const BASIC_SC = 'Basic Sciences';
+const BASIC_ES = 'Basic Engineering\nSkills';
 const DEPTT_CORE = 'Departmental Core Theory';
 const DEPTT_ELEC = 'Departmental Elective';
 const FREE_ELEC = 'Free Elective';
@@ -68,6 +69,7 @@ show_total_gpa = function(){
  	total_grades = 0;
  	total_credits = 0;
  	basic_sc = 0;
+	basic_es = 0;
  	felec = 0;
  	dep_el = 0;
  	dep_core = 0;
@@ -85,10 +87,10 @@ show_total_gpa = function(){
 
  		type = $(this).children(".col5").html().trim().slice(6);
  		
- 		
  		grade = grade_values[grade];
  		credits = Number(credits);
  		if(type==BASIC_SC) basic_sc+=credits;
+ 		else if(type==BASIC_ES) basic_es+=credits;
  		else if(type==DEPTT_ELEC) dep_el+=credits;
  		else if(type== DEPTT_CORE) dep_core+=credits;
  		else if(type== FREE_ELEC) felec+=credits;
@@ -99,6 +101,9 @@ show_total_gpa = function(){
  	console.log(total_grades, total_credits);
  	console.log('Basic-sc: ');
  	console.log(basic_sc);
+  
+	console.log('Basic-Engineering-Skills: ');
+	console.log(basic_es);
 
  	console.log('Deptt Elective: ');
  	console.log(dep_el);
@@ -121,6 +126,8 @@ show_total_gpa = function(){
 		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Free Elective</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + felec + '</span></li> \
 		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">LA/CA</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + laca + '</span></li> \
 		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Basic Sciences</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + basic_sc + '</span></li> \
+		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Basic Engineering Skills</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + basic_es + '</span></li> \
+		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Total credits</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + total_credits + '</span></li> \
 		</ul>');
 }
 if (!(typeof unsafeWindow === 'undefined')) {
