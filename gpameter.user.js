@@ -22,6 +22,9 @@ const DEPTT_ELEC = 'Departmental Elective';
 const FREE_ELEC = 'Free Elective';
 const TYPE_LA = 'Liberal Arts Elective';
 const TYPE_CA = 'Creative Arts';
+const TYPE_DMC = 'Double Major Core'
+const TYPE_DME = 'Double Major Elective'
+const BASIC_ENG = 'Basic Engineering Skills'
 
 
 var grade_values = {
@@ -71,7 +74,12 @@ show_total_gpa = function(){
  	felec = 0;
  	dep_el = 0;
  	dep_core = 0;
- 	laca = 0;
+    laca = 0;
+    dme = 0;
+    dmc = 0;
+    be = 0;
+
+     
  	if ($(".cgpa_cal_check").length==0)
  		add_checkboxes();
  	elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
@@ -92,7 +100,12 @@ show_total_gpa = function(){
  		else if(type==DEPTT_ELEC) dep_el+=credits;
  		else if(type== DEPTT_CORE) dep_core+=credits;
  		else if(type== FREE_ELEC) felec+=credits;
- 		else if(type== TYPE_LA || type == TYPE_CA) laca+=credits;
+        else if(type== TYPE_LA || type == TYPE_CA) laca+=credits;
+        else if(type== TYPE_DMC ) dmc+=credits;
+        else if(type== TYPE_DME ) dme+=credits;
+        //else if(type== BASIC_ENG ) be+=credits;
+        
+         
  		total_grades += credits * grade;
  		total_credits += credits;
  	});
@@ -110,7 +123,17 @@ show_total_gpa = function(){
  	console.log(felec);
 
 	console.log('LA CA: ');
- 	console.log(laca);
+    console.log(laca);
+    
+    console.log('Double major elective: ');
+    console.log(dme);
+    
+    console.log('Double major core: ');
+    console.log(dmc);
+    
+    //console.log('Basic Engineering Skills: ');
+ 	//console.log(be);
+
 
  	var gpa = (total_grades / total_credits).toFixed(2);
  	$('#gpa_button').val('Show Gpa');
@@ -120,7 +143,9 @@ show_total_gpa = function(){
 		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Deptt Elective</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + dep_el + '</span></li> \
 		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Free Elective</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + felec + '</span></li> \
 		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">LA/CA</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + laca + '</span></li> \
-		<li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Basic Sciences</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + basic_sc + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Basic Sciences</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + basic_sc + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Double Major Core</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + dmc + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Double Major elective</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + dme + '</span></li> \
 		</ul>');
 }
 if (!(typeof unsafeWindow === 'undefined')) {
