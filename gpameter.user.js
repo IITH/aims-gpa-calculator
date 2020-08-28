@@ -38,16 +38,16 @@ var grade_values = {
     'FS': 0
 };
 console.log(studentId);
-append_checkbox = function(parent, is_checked){
-    parent.append("<input class=\"cgpa_cal_check\" type=\"checkbox\" "+(is_checked?"checked":"")+" />");
+append_checkbox = function (parent, is_checked) {
+    parent.append("<input class=\"cgpa_cal_check\" type=\"checkbox\" " + (is_checked ? "checked" : "") + " />");
 }
-add_checkboxes = function(){
+add_checkboxes = function () {
     var courses_checked = new Set();
     $(".cgpa_cal_check").remove();
     elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
-    elems.each(function(i){
+    elems.each(function (i) {
         var course_id = $(this).children(".col1").html().trim();
-        if (courses_checked.has(course_id)){
+        if (courses_checked.has(course_id)) {
             append_checkbox($(this).children(".col1"), false);
             return;
         }
@@ -63,7 +63,7 @@ add_checkboxes = function(){
     });
 }
 
-show_total_gpa = function(){
+show_total_gpa = function () {
     $('#gpa_button').val('Calculating');
     $('#gpa_bar').remove();
     cg_total_grades = 0;
@@ -75,25 +75,25 @@ show_total_gpa = function(){
     dep_el = 0;
     dep_core = 0;
     laca = 0;
-    if ($(".cgpa_cal_check").length==0)
+    if ($(".cgpa_cal_check").length == 0)
         add_checkboxes();
     elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
-    elems.each(function(i){
-        if ($(this).find(".cgpa_cal_check:checked").length == 0 )
+    elems.each(function (i) {
+        if ($(this).find(".cgpa_cal_check:checked").length == 0)
             return;
         grade = $(this).children(".col8").html().trim().slice(6);
         credits = $(this).children(".col3").html().trim().slice(6);
-        
+
         type = $(this).children(".col5").html().trim().slice(6);
-        
+
         credits = Number(credits);
-        if(type==BASIC_SC) basic_sc+=credits;
-        else if(type==BASIC_ES) basic_es+=credits;
-        else if(type==DEPTT_ELEC) dep_el+=credits;
-        else if(type== DEPTT_CORE) dep_core+=credits;
-        else if(type== FREE_ELEC) felec+=credits;
-        else if(type== TYPE_LA || type == TYPE_CA) laca+=credits;
-        
+        if (type == BASIC_SC) basic_sc += credits;
+        else if (type == BASIC_ES) basic_es += credits;
+        else if (type == DEPTT_ELEC) dep_el += credits;
+        else if (type == DEPTT_CORE) dep_core += credits;
+        else if (type == FREE_ELEC) felec += credits;
+        else if (type == TYPE_LA || type == TYPE_CA) laca += credits;
+
         total_credits += credits;
 
         if (!(grade in grade_values))
@@ -105,7 +105,7 @@ show_total_gpa = function(){
     console.log(cg_total_grades, cg_total_credits);
     console.log('Basic-sc: ');
     console.log(basic_sc);
-  
+
     console.log('Basic-Engineering-Skills: ');
     console.log(basic_es);
 
@@ -124,14 +124,14 @@ show_total_gpa = function(){
     var gpa = (cg_total_grades / cg_total_credits).toFixed(2);
     $('#gpa_button').val('Show Gpa');
     $('#courseHistoryUI .clear').after('<ul id="gpa_bar" class="subCnt"><li class="hierarchyLi dataLi hierarchyHdr changeHdrCls"><span class="col"> TOTAL GPA </span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Total GPA of graded courses</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + gpa + '</span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Deptt Core Theory</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + dep_core + '</span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Deptt Elective</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + dep_el + '</span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Free Elective</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + felec + '</span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">LA/CA</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + laca + '</span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Basic Sciences</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + basic_sc + '</span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Basic Engineering Skills</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + basic_es + '</span></li> \
-        <li class="hierarchyLi dataLi"><span class="col1 col">&nbsp;</span><span class="col2 col">Total credits</span><span class="col3 col">&nbsp;</span><span class="col4 col">&nbsp;</span><span class="col5 col">&nbsp;</span><span class="col6 col">&nbsp;</span><span class="col7 col">&nbsp;</span><span class="col4 col">' + total_credits + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Total GPA of graded courses </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + gpa + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Deptt Core Theory </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + dep_core + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Deptt Elective </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + dep_el + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Free Elective </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + felec + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> LA/CA </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + laca + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Basic Sciences </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + basic_sc + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Basic Engineering Skills </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + basic_es + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Total credits </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + total_credits + '</span></li> \
         </ul>');
 }
 
