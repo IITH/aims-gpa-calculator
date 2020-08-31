@@ -13,7 +13,8 @@ var exclude_list = [
     'Honours project',
     'Honours coursework',
     'FCC',
-    'Additional'
+    'Additional',
+    'Audit',
 ];
 
 const BASIC_SC = 'Basic Sciences';
