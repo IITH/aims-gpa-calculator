@@ -107,6 +107,9 @@ show_total_gpa = function(){
  		total_grades += credits * grade;
  		total_credits += credits;
  	});
+	felec++;
+	dme++;
+	laca++;
  	console.log(total_grades, total_credits);
  	console.log('Basic-sc: ');
  	console.log(basic_sc);
