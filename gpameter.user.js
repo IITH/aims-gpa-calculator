@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        GPA meter
-// @namespace   http://192.168.0.103:9090
+// @namespace   https://aims.iith.ac.in/
 // @description A user script to show GPA on aims page
-// @include     http://192.168.0.103:9090/aims/courseReg/myCrsHistoryPage?*
+// @include     https://aims.iith.ac.in/aims/courseReg/myCrsHistoryPage?*
 // @version     1
 // @grant       none
 // ==/UserScript==
