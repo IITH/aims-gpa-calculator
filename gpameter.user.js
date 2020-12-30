@@ -26,6 +26,7 @@ const TYPE_LA = 'Liberal Arts Elective';
 const TYPE_CA = 'Creative Arts';
 
 
+
 var grade_values = {
     'A+': 10,
     'A': 10,
@@ -76,6 +77,7 @@ show_total_gpa = function () {
     dep_el = 0;
     dep_core = 0;
     laca = 0;
+    satfctry = 0
     if ($(".cgpa_cal_check").length == 0)
         add_checkboxes();
     elems = $(".hierarchyLi.dataLi").not(".hierarchyHdr, .hierarchySubHdr");
@@ -88,7 +90,8 @@ show_total_gpa = function () {
         type = $(this).children(".col5").html().trim().slice(6);
 
         credits = Number(credits);
-        if (type == BASIC_SC) basic_sc += credits;
+        if (grade == 'S') satfctry +=credits;
+        else if (type == BASIC_SC) basic_sc += credits;
         else if (type == BASIC_ES) basic_es += credits;
         else if (type == DEPTT_ELEC) dep_el += credits;
         else if (type == DEPTT_CORE) dep_core += credits;
@@ -122,6 +125,9 @@ show_total_gpa = function () {
     console.log('LA CA: ');
     console.log(laca);
 
+    console.log('Satisfactory');
+    console.log(satfctry);
+
     var gpa = (cg_total_grades / cg_total_credits).toFixed(2);
     $('#gpa_button').val('Show Gpa');
     $('#courseHistoryUI .clear').after('<ul id="gpa_bar" class="subCnt"><li class="hierarchyLi dataLi hierarchyHdr changeHdrCls"><span class="col"> TOTAL GPA </span></li> \
@@ -129,6 +135,7 @@ show_total_gpa = function () {
         <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Deptt Core Theory </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + dep_core + '</span></li> \
         <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Deptt Elective </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + dep_el + '</span></li> \
         <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Free Elective </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + felec + '</span></li> \
+        <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Satisfactory  </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + satfctry + '</span></li> \
         <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> LA/CA </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + laca + '</span></li> \
         <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Basic Sciences </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + basic_sc + '</span></li> \
         <li class="hierarchyLi dataLi"><span class="col1 col"> &nbsp; </span><span class="col2 col"> Basic Engineering Skills </span><span class="col3 col"> &nbsp; </span><span class="col4 col"> &nbsp; </span><span class="col5 col"> &nbsp; </span><span class="col6 col"> &nbsp; </span><span class="col7 col"> &nbsp; </span><span class="col4 col">' + basic_es + '</span></li> \
